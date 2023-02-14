@@ -20,8 +20,17 @@ var (
 	turn string
 )
 
+type status int
+
+const (
+	playing status = iota
+	win     status = iota
+	draw    status = iota
+)
+
 func main() {
 	turn = "●"
+	status := playing
 	for {
 		for _, row := range Board {
 			fmt.Println(row)
@@ -47,7 +56,6 @@ func main() {
 			fmt.Println("入力が少なすぎます。もう一度入力してください")
 			continue
 		}
-		fmt.Println(inputArr)
 
 		row, err := strconv.Atoi(inputArr[0])
 		if err != nil {
@@ -68,8 +76,49 @@ func main() {
 			continue
 		}
 
-		//入力
+		if Board[row][col] != "■" {
+			fmt.Println("既に入力されている場所です。もう一度入力してください")
+			continue
+		}
 		Board[row][col] = turn
+		for i := 1; i <= 3; i++ {
+			if Board[i][1] == turn && Board[i][2] == turn && Board[i][3] == turn {
+				status = win
+				break
+			}
+			if Board[1][i] == turn && Board[2][i] == turn && Board[3][i] == turn {
+				status = win
+				break
+			}
+		}
+		if Board[1][1] == turn && Board[2][2] == turn && Board[3][3] == turn {
+			status = win
+		}
+		if Board[3][1] == turn && Board[2][2] == turn && Board[1][3] == turn {
+			status = win
+		}
+
+		isDraw := true
+		for r := 1; r <= 3; r++ {
+			for c := 1; c <= 3; c++ {
+				if Board[r][c] == "■" {
+					isDraw = false
+				}
+			}
+		}
+
+		if isDraw {
+			status = draw
+		}
+
+		if status == win {
+			fmt.Printf("%s WIN", turn)
+			break
+		}
+		if status == draw {
+			fmt.Printf("%s DRAW", turn)
+			break
+		}
 		if turn == "●" {
 			turn = "✖️"
 		} else {
