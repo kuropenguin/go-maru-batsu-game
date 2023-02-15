@@ -112,11 +112,11 @@ func main() {
 		}
 
 		if status == win {
-			fmt.Printf("%s WIN", turn)
+			fmt.Printf("%s WIN\n", turn)
 			break
 		}
 		if status == draw {
-			fmt.Printf("%s DRAW", turn)
+			fmt.Printf("%s DRAW\n", turn)
 			break
 		}
 		if turn == "●" {
