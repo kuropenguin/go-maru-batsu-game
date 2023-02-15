@@ -9,24 +9,53 @@ import (
 	"strings"
 )
 
-var (
-	Board = [][]string{
-		[]string{"", "1", "2", "3"},
-		[]string{"1", "■", "■", "■"},
-		[]string{"2", "■", "■", "■"},
-		[]string{"3", "■", "■", "■"},
+type (
+	game struct {
+		board   [4][4]string
+		player1 player
+		player2 player
+		status  status
+		turn    turn
 	}
 
-	turn string
+	turn   int
+	status int
+
+	player struct {
+		name string
+	}
 )
 
-type status int
+const (
+	turn1 turn = iota + 1
+	turn2 turn = iota + 1
+)
 
 const (
 	playing status = iota
 	win     status = iota
 	draw    status = iota
 )
+
+var (
+	initBoard = [4][4]string{
+		[4]string{"", "1", "2", "3"},
+		[4]string{"1", "■", "■", "■"},
+		[4]string{"2", "■", "■", "■"},
+		[4]string{"3", "■", "■", "■"},
+	}
+)
+
+func newGame() *game {
+
+	return &game{
+		board:   initBoard,
+		player1: player{name: "●"},
+		player2: player{name: "✖️"},
+		turn:    turn1,
+		status:  playing,
+	}
+}
 
 func main() {
 	turn = "●"
