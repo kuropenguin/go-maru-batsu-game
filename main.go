@@ -2,70 +2,14 @@ package main
 
 import (
 	"fmt"
+
+	"github.com/kuropenguin/go-maru-batsu-game/domain"
 )
-
-type (
-	game struct {
-		board
-		player1 player
-		player2 player
-		status  status
-		turn    turn
-	}
-
-	turn   int
-	status int
-
-	board struct {
-		squares [4][4]string
-	}
-	player struct {
-		name string
-	}
-)
-
-const (
-	turn1 turn = iota + 1
-	turn2 turn = iota + 1
-)
-
-const (
-	playing status = iota
-	win     status = iota
-	draw    status = iota
-)
-
-const (
-	maru  string = "●"
-	batsu string = "✖️"
-)
-
-var (
-	initSquares = [4][4]string{
-		[4]string{"", "1", "2", "3"},
-		[4]string{"1", "■", "■", "■"},
-		[4]string{"2", "■", "■", "■"},
-		[4]string{"3", "■", "■", "■"},
-	}
-)
-
-func newGame() *game {
-
-	return &game{
-		board: board{
-			squares: initSquares,
-		},
-		player1: player{name: "●"},
-		player2: player{name: "✖️"},
-		turn:    turn1,
-		status:  playing,
-	}
-}
 
 func main() {
-	game := newGame()
+	game := domain.NewGame()
 	for {
-		for _, row := range game.board.squares {
+		for _, row := range game.CurrentBoard() {
 			fmt.Println(row)
 		}
 		// fmt.Printf("%s's turn\n", game.turn)
