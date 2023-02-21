@@ -23,25 +23,13 @@ func main() {
 			fmt.Println("もう一度入力してください")
 			continue
 		}
-		fmt.Println(input)
-		// if !(1 <= row && row <= 3) {
-		// 	fmt.Println("rowの入力は1~3の間でのみ可能です。もう一度入力してください")
-		// 	continue
-		// }
-		// col, err := strconv.Atoi(inputArr[1])
-		// if err != nil {
-		// 	fmt.Println("colの入力で数字以外が使用されました。もう一度入力してください")
-		// 	continue
-		// }
-		// if !(1 <= col && col <= 3) {
-		// 	fmt.Println("colの入力は1~3の間でのみ可能です。もう一度入力してください")
-		// 	continue
-		// }
+		err = game.Board.Put(input.Row, input.Col, string(game.CurrentTurn()))
+		if err != nil {
+			fmt.Println(err.Error())
+			fmt.Println("もう一度入力してください")
+			continue
+		}
 
-		// if Board[row][col] != "■" {
-		// 	fmt.Println("既に入力されている場所です。もう一度入力してください")
-		// 	continue
-		// }
 		// Board[row][col] = turn
 		// for i := 1; i <= 3; i++ {
 		// 	if Board[i][1] == turn && Board[i][2] == turn && Board[i][3] == turn {

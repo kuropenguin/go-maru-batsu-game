@@ -2,24 +2,19 @@ package domain
 
 type (
 	Game struct {
-		board   board
+		Board   board
 		player1 player
 		player2 player
 		status  status
-		turn    turn
+		turn    Turn
 	}
 
-	turn   int
+	Turn   string
 	status int
 
 	player struct {
 		name string
 	}
-)
-
-const (
-	turn1 turn = iota + 1
-	turn2 turn = iota + 1
 )
 
 const (
@@ -29,20 +24,24 @@ const (
 )
 
 const (
-	maru  string = "●"
-	batsu string = "✖️"
+	Maru  Turn = "●"
+	Batsu Turn = "✖️"
 )
 
 func NewGame() *Game {
 	return &Game{
-		board:   newBoard(),
+		Board:   newBoard(),
 		player1: player{name: "●"},
 		player2: player{name: "✖️"},
-		turn:    turn1,
+		turn:    Maru,
 		status:  playing,
 	}
 }
 
 func (g *Game) CurrentBoard() [4][4]string {
-	return g.board.squares
+	return g.Board.squares
+}
+
+func (g *Game) CurrentTurn() Turn {
+	return g.turn
 }
