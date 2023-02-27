@@ -30,50 +30,18 @@ func main() {
 			continue
 		}
 
-		// Board[row][col] = turn
-		// for i := 1; i <= 3; i++ {
-		// 	if Board[i][1] == turn && Board[i][2] == turn && Board[i][3] == turn {
-		// 		status = win
-		// 		break
-		// 	}
-		// 	if Board[1][i] == turn && Board[2][i] == turn && Board[3][i] == turn {
-		// 		status = win
-		// 		break
-		// 	}
-		// }
-		// if Board[1][1] == turn && Board[2][2] == turn && Board[3][3] == turn {
-		// 	status = win
-		// }
-		// if Board[3][1] == turn && Board[2][2] == turn && Board[1][3] == turn {
-		// 	status = win
-		// }
+		game.Judge()
 
-		// isDraw := true
-		// for r := 1; r <= 3; r++ {
-		// 	for c := 1; c <= 3; c++ {
-		// 		if Board[r][c] == "■" {
-		// 			isDraw = false
-		// 		}
-		// 	}
-		// }
+		if game.Status() == domain.Win {
+			fmt.Printf("%s is win!\n", game.CurrentTurn())
+			break
+		}
 
-		// if isDraw {
-		// 	status = draw
-		// }
+		if game.Status() == domain.Draw {
+			fmt.Println("Draw!")
+		}
 
-		// if status == win {
-		// 	fmt.Printf("%s WIN\n", turn)
-		// 	break
-		// }
-		// if status == draw {
-		// 	fmt.Printf("%s DRAW\n", turn)
-		// 	break
-		// }
-		// if turn == "●" {
-		// 	turn = "✖️"
-		// } else {
-		// 	turn = "●"
-		// }
+		game.ChangeTurn()
 	}
 	fmt.Println("Game Done")
 }

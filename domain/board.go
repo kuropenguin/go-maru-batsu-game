@@ -34,3 +34,14 @@ func (b *board) Put(row int, col int, turn string) error {
 	b.squares[row][col] = turn
 	return nil
 }
+
+func (b *board) IsFull() bool {
+	for r := 1; r <= 3; r++ {
+		for c := 1; c <= 3; c++ {
+			if b.squares[r][c] == "■" {
+				return false
+			}
+		}
+	}
+	return true
+}
