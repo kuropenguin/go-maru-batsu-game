@@ -39,6 +39,7 @@ func main() {
 
 		if game.Status() == domain.Draw {
 			fmt.Println("Draw!")
+			break
 		}
 
 		game.ChangeTurn()
